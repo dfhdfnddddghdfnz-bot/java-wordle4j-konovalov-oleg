@@ -5,12 +5,17 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+# в репозитории остаются только настройки IDEA из шаблона, остальное игнорируется
+.idea/*
+!.idea/.gitignore
+!.idea/inspectionProfiles/
+!.idea/libraries/
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
 *.iws
 *.iml
+!/java-wordle4j.iml
 *.ipr
 
 ### Eclipse ###
@@ -37,3 +42,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Logs ###
+*.log
