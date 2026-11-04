@@ -1,5 +1,7 @@
 package ru.yandex.practicum;
 
+import ru.yandex.practicum.WordleConstants.HintLetter;
+
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -8,9 +10,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 
-import static ru.yandex.practicum.WordleConstants.ABSENT;
-import static ru.yandex.practicum.WordleConstants.CORRECT;
-import static ru.yandex.practicum.WordleConstants.PRESENT;
 import static ru.yandex.practicum.WordleConstants.WORD_LENGTH;
 
 public class WordleDictionary {
@@ -94,20 +93,20 @@ public class WordleDictionary {
                     + " русских букв: \"" + guess + "\" и \"" + answer + "\"");
         }
         StringBuilder hint = new StringBuilder(WORD_LENGTH);
-        // сколько раз каждая буква ответа, не совпавшая по месту, ещё может дать "^"
+        // сколько раз каждая буква ответа, не совпавшая по месту, ещё может дать HintLetter.IN_WRONG_PLACE
         int[] unmatched = new int[LAST_LETTER - FIRST_LETTER + 1];
         for (int i = 0; i < WORD_LENGTH; i++) {
             if (guess.charAt(i) == answer.charAt(i)) {
-                hint.append(CORRECT);
+                hint.append(HintLetter.IN_PLACE);
             } else {
-                hint.append(ABSENT);
+                hint.append(HintLetter.UNMATCHED);
                 unmatched[answer.charAt(i) - FIRST_LETTER]++;
             }
         }
         for (int i = 0; i < WORD_LENGTH; i++) {
             int letter = guess.charAt(i) - FIRST_LETTER;
-            if (hint.charAt(i) == ABSENT && unmatched[letter] > 0) {
-                hint.setCharAt(i, PRESENT);
+            if (hint.charAt(i) == HintLetter.UNMATCHED && unmatched[letter] > 0) {
+                hint.setCharAt(i, HintLetter.IN_WRONG_PLACE);
                 unmatched[letter]--;
             }
         }
